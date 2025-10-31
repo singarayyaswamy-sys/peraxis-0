@@ -1,0 +1,3 @@
+@echo off
+echo Starting Peraxis Platform...
+call docs\run-docker-full.bat

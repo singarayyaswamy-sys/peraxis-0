@@ -78,7 +78,3 @@ docker-compose up -d --build
 - MongoDB (27017)
 - Redis (6379)
 - Elasticsearch (9200)
-
-## 📚 Documentation
-
-All documentation and batch files are located in the `docs/` folder.

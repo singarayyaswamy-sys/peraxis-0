@@ -32,8 +32,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - JWT_SECRET=peraxis-super-secret-jwt-key-change-in-production
     depends_on:
-      - mongodb
-      - redis
+      - admin-service
     networks:
       - peraxis-network
 
@@ -44,8 +43,15 @@ services:
       - "8085:8085"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - MONGODB_URI=mongodb://admin:peraxis123@mongodb:27017/peraxis?authSource=admin
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:peraxis123@mongodb:27017/peraxis?authSource=admin
+      - SPRING_DATA_MONGODB_HOST=mongodb
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=peraxis
+      - SPRING_DATA_MONGODB_USERNAME=admin
+      - SPRING_DATA_MONGODB_PASSWORD=peraxis123
+      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
       - REDIS_HOST=redis
+      - REDIS_PORT=6379
       - REDIS_PASSWORD=peraxis123
     depends_on:
       - mongodb
