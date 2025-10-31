@@ -1,0 +1,1 @@
+// LoadBalancer configuration removed - using direct URLs in application.yml

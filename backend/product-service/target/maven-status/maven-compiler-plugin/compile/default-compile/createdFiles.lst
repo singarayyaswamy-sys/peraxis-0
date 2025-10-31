@@ -1,0 +1,9 @@
+com\peraxis\product\controller\ProductController.class
+com\peraxis\product\controller\HealthController.class
+com\peraxis\product\service\ProductService.class
+com\peraxis\product\repository\ProductRepository.class
+com\peraxis\product\entity\ProductStatus.class
+com\peraxis\product\entity\ProductVariant.class
+com\peraxis\product\config\DataInitializer.class
+com\peraxis\product\entity\Product.class
+com\peraxis\product\ProductServiceApplication.class

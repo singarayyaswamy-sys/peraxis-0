@@ -1,0 +1,5 @@
+com\peraxis\search\config\RedisConfig.class
+com\peraxis\search\config\RestTemplateConfig.class
+com\peraxis\search\controller\SearchController.class
+com\peraxis\search\service\SearchService.class
+com\peraxis\search\SearchServiceApplication.class

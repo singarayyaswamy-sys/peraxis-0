@@ -1,0 +1,66 @@
+services:
+  # Databases Only
+  mysql:
+    image: mysql:8.0
+    container_name: peraxis-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: peraxis123
+      MYSQL_DATABASE: peraxis_main
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - peraxis-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  mongodb:
+    image: mongo:7.0
+    container_name: peraxis-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: peraxis123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - peraxis-network
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: peraxis-redis
+    command: redis-server --requirepass peraxis123
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - peraxis-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: peraxis-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - peraxis-network
+
+volumes:
+  mysql_data:
+  mongodb_data:
+  redis_data:
+  elasticsearch_data:
+
+networks:
+  peraxis-network:
+    driver: bridge

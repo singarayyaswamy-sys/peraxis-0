@@ -1,0 +1,5 @@
+com\peraxis\gateway\config\CorsConfig.class
+com\peraxis\gateway\ApiGatewayApplication.class
+com\peraxis\gateway\config\GatewayConfig.class
+com\peraxis\gateway\config\WebSocketProxyConfig.class
+com\peraxis\gateway\config\OpenApiConfig.class

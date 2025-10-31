@@ -1,0 +1,4 @@
+com\peraxis\activity\controller\ActivityController.class
+com\peraxis\activity\service\ActivityService.class
+com\peraxis\activity\ActivityServiceApplication.class
+com\peraxis\activity\entity\UserActivity.class

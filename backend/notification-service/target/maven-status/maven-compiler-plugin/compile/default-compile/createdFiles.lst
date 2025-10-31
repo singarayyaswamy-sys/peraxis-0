@@ -1,0 +1,3 @@
+com\peraxis\notification\config\RestTemplateConfig.class
+com\peraxis\notification\controller\NotificationController.class
+com\peraxis\notification\NotificationServiceApplication.class

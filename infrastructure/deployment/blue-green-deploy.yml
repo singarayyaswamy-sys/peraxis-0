@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: peraxis-customer-app
+  namespace: peraxis
+spec:
+  replicas: 3
+  strategy:
+    blueGreen:
+      activeService: peraxis-customer-app-active
+      previewService: peraxis-customer-app-preview
+      autoPromotionEnabled: false
+      scaleDownDelaySeconds: 30
+  selector:
+    matchLabels:
+      app: peraxis-customer-app
+  template:
+    metadata:
+      labels:
+        app: peraxis-customer-app
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      containers:
+      - name: customer-app
+        image: peraxis/customer-app:v1.0.0
+        ports:
+        - containerPort: 3000
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"

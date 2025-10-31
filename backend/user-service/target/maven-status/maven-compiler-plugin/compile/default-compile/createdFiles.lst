@@ -1,0 +1,15 @@
+com\peraxis\user\entity\User$UserStatus.class
+com\peraxis\user\UserServiceApplication.class
+com\peraxis\user\entity\User.class
+com\peraxis\user\dto\RegisterRequest.class
+com\peraxis\user\repository\UserRepository.class
+com\peraxis\user\entity\User$UserRole.class
+com\peraxis\user\controller\UserController.class
+com\peraxis\user\security\SecurityConfig.class
+com\peraxis\user\service\UserService$1.class
+com\peraxis\user\service\UserService.class
+com\peraxis\user\security\JwtTokenProvider.class
+com\peraxis\user\config\RestTemplateConfig.class
+com\peraxis\user\dto\LoginRequest.class
+com\peraxis\user\aspect\LoggingAspect.class
+com\peraxis\user\dto\UserResponse.class

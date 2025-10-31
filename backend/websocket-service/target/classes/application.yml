@@ -1,0 +1,49 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: websocket-service
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: peraxis123
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 20
+          max-idle: 10
+          min-idle: 5
+    mongodb:
+      host: localhost
+      port: 27017
+      database: peraxis_websocket
+      username: admin
+      password: peraxis123
+      authentication-database: admin
+
+websocket:
+  heartbeat:
+    interval: 30000
+  reconnect:
+    max-attempts: 10
+    delay: 5000
+  message:
+    max-size: 1048576 # 1MB
+  session:
+    timeout: 300000 # 5 minutes
+
+ai:
+  service:
+    url: http://localhost:8084
+    timeout: 10000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,websocket
+  endpoint:
+    health:
+      show-details: always

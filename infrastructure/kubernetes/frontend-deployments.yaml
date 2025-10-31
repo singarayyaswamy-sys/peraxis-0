@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-app
+  namespace: peraxis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: customer-app
+  template:
+    metadata:
+      labels:
+        app: customer-app
+    spec:
+      containers:
+      - name: customer-app
+        image: peraxis/customer-app:v1.0.0
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-app
+  namespace: peraxis
+spec:
+  selector:
+    app: customer-app
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seller-portal
+  namespace: peraxis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seller-portal
+  template:
+    metadata:
+      labels:
+        app: seller-portal
+    spec:
+      containers:
+      - name: seller-portal
+        image: peraxis/seller-portal:v1.0.0
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seller-portal
+  namespace: peraxis
+spec:
+  selector:
+    app: seller-portal
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer

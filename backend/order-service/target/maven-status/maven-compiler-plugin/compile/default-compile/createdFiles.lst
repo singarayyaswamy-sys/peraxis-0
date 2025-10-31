@@ -1,0 +1,5 @@
+com\peraxis\order\controller\OrderController.class
+com\peraxis\order\entity\Order.class
+com\peraxis\order\entity\OrderItem.class
+com\peraxis\order\entity\Order$OrderStatus.class
+com\peraxis\order\OrderServiceApplication.class

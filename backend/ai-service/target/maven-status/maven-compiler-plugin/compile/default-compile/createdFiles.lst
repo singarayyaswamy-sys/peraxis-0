@@ -1,0 +1,8 @@
+com\peraxis\ai\AiServiceApplication.class
+com\peraxis\ai\dto\ChatRequest.class
+com\peraxis\ai\service\RecommendationService.class
+com\peraxis\ai\dto\RecommendationRequest.class
+com\peraxis\ai\controller\AiController.class
+com\peraxis\ai\service\GeminiService.class
+com\peraxis\ai\config\EnvironmentConfig.class
+com\peraxis\ai\analytics\AIAnalyticsEngine.class
