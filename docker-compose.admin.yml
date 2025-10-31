@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: peraxis-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: peraxis123
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - peraxis-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: peraxis-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass peraxis123
+    networks:
+      - peraxis-network
+
+  api-gateway:
+    build: ./backend/api-gateway
+    container_name: peraxis-api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=peraxis-super-secret-jwt-key-change-in-production
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - peraxis-network
+
+  admin-service:
+    build: ./backend/admin-service
+    container_name: peraxis-admin-service
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - MONGODB_URI=mongodb://admin:peraxis123@mongodb:27017/peraxis?authSource=admin
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=peraxis123
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - peraxis-network
+
+  admin-dashboard:
+    build: ./frontend/admin-dashboard
+    container_name: peraxis-admin-dashboard
+    ports:
+      - "3002:80"
+    depends_on:
+      - api-gateway
+      - admin-service
+    networks:
+      - peraxis-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  peraxis-network:
+    driver: bridge
