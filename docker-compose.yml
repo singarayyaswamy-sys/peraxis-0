@@ -12,6 +12,7 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./docs/DATABASE-INIT.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - peraxis-network
     healthcheck:
