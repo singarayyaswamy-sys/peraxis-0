@@ -82,3 +82,19 @@ docker-compose up -d --build
 ## 📚 Documentation
 
 All documentation and batch files are located in the `docs/` folder.
+
+## 🔧 Development Modes
+
+### Full Docker Mode (Production-like)
+```bash
+run.bat
+```
+
+### Local Development Mode (Debugging)
+```bash
+# Databases + Frontends in Docker, Backends in terminals
+docs\start-local-dev.bat
+docs\start-all-backends.bat
+```
+
+See `docs/LOCAL-DEV-GUIDE.md` for detailed instructions.
